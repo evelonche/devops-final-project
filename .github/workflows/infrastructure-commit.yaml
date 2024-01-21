@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} made a commit to infrastructure
 
 on:
   push:
-    paths: ['infrastructure/**' ]
+    #    paths: ['infrastructure/**' ]
     branches: [ 'ftr/*' ]
 
 jobs:
