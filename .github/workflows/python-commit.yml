@@ -1,10 +1,10 @@
 name: Python commit pipeline
-run-name: ${{ github.actor }} made a commit
-
+run-name: ${{ github.actor }} made a commit to the Python directory
+  
 on:
   push:
     branches: [ ftr/* ]
-      #    paths: [ training/** ]
+    paths: [ training/** ]
 
 jobs:
   pylint:
