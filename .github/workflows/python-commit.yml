@@ -11,12 +11,14 @@ jobs:
     name: "Check with Pylint"
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
     - uses: cclauss/GitHub-Action-for-pylint@0.7.0
 
   black:
     name: "Check formatting with Black"
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
     - uses: psf/black@stable
 
   gitleaks:
