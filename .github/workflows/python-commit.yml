@@ -22,7 +22,6 @@ jobs:
   gitleaks:
     name: "Check for leaks in secrets with gitleaks"
     runs-on: ubuntu-latest
-    needs: unit-test
     steps:
     - uses: actions/checkout@v4
       with:
