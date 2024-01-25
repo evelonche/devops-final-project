@@ -41,11 +41,11 @@ jobs:
     - uses: AppThreat/sast-scan-action@master
       with:
         type: "python"
-  
+
   mlflow-build-push:
     name: "Build Docker image, check for vulneratibilities and push"
     runs-on: ubuntu-latest
-    needs: vulnerability
+    needs: sonar_cloud
     steps:
     - name: "Checkout"
       uses: actions/checkout@v4
