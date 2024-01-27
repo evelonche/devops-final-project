@@ -44,7 +44,7 @@ resource "kubernetes_deployment" "mlflow_server" {
 
           env {
             name  = "BACKEND_STORE_URI"
-            value = "postgresql://${var.db_username}:${var.db_password}@${var.db_host}/${var.db_name}"
+            value = "postgresql://postgres:${var.db_password}@postgres-service:5432/${var.db_name}"
           }
 
           env {
