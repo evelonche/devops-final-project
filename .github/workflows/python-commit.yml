@@ -96,3 +96,4 @@ jobs:
         docker tag mltraining:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/mltraining:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mltraining:${{ github.sha }}
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mltraining:latest
+
