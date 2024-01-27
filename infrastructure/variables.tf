@@ -30,5 +30,11 @@ variable "mlflow_artifact_path" {
 variable "mlflow_image_tag" {
   description = "Tag to use for the MLflow server Docker image" 
   type = string
-  default = "f744124c7589678dcd5f9af0a3ac4de50978f916"
+  default = "latest"
+}
+
+variable "training_job_image_tag" {
+  description = "Tag to use for ML training Docker image"
+  type = string
+  default = "latest"
 }

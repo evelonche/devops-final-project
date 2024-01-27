@@ -107,28 +107,35 @@ resource "kubernetes_persistent_volume_claim" "mlflow_pvc" {
   }
 }
 
-#resource "kubernetes_ingress" "mlflow_ingress" {
-#  metadata {
-#    name = "mlflow-ingress"
-#    annotations = {
-#      "kubernetes.io/ingress.class" = "nginx"
-#      "nginx.ingress.kubernetes.il/add-base-url" = "true"
-#    }
-#  }
-#  spec {
-#    rule { 
-#      host = "mlflow-sever.local"
-#      http {
-#        path {
-#          backend {
-#            service_name = "mlflow-service"
-#            service_port = 5000
-#          }
-#          path = "/"
-#        }
-#      }
-#    }
-#  }
-#} 
+resource "kubernetes_job" "train_job" {
+  metadata {
+    name = "train-job"
+    namespace = "mlflow"
+    labels = {
+      app = "mlflow"
+    }
+  }
+
+  spec {
+    template {
+      metadata {}
+      spec {
+        container {
+          name  = "mltraining"
+          image = "evelonche/mltraining:${var.training_job_image_tag}"
+
+          env {
+            name  = "MLFLOW_TRACKING_URI"
+            value = "http://mlflow-service.mlflow.svc.cluster.local:5000"
+          }
+        }
+
+        restart_policy = "Never"
+      }
+    }
+
+    backoff_limit = 2
+  }
+}
 
 
