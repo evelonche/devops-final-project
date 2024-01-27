@@ -35,7 +35,7 @@ resource "kubernetes_deployment" "mlflow_server" {
 
       spec {
         container {
-          image = "evelonche/mlflow:f744124c7589678dcd5f9af0a3ac4de50978f916"
+          image = "evelonche/mlflow:${var.mlflow_image_tag}"
           name  = "mlflow"
 
           port {

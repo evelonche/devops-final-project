@@ -26,3 +26,9 @@ variable "mlflow_artifact_path" {
   type = string
   default = "/mlflow/artifacts"
 }
+
+variable "mlflow_image_tag" {
+  description = "Tag to use for the MLflow server Docker image" 
+  type = string
+  default = "f744124c7589678dcd5f9af0a3ac4de50978f916"
+}
