@@ -5,4 +5,4 @@ RUN pip install mlflow[extras]==2.9.2 && \
 
 
 EXPOSE 5000
-ENTRYPOINT ["mlflow", "server"]
+ENTRYPOINT ["mlflow", "server", "--host", "0.0.0.0"]
