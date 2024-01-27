@@ -45,7 +45,6 @@ jobs:
   mlflow-build-push:
     name: "Build Docker image, check for vulneratibilities and push"
     runs-on: ubuntu-latest
-    needs: sonar_cloud
     steps:
     - name: "Checkout"
       uses: actions/checkout@v4
@@ -65,15 +64,15 @@ jobs:
         file: ./mlflow.Dockerfile
         push: false
         tags: evelonche/mlflow:${{ github.sha }}
-          #    - name: "Scan image"
-          #      uses: aquasecurity/trivy-action@master
-          #      with:
-          #        image-ref: evelonche/mlflow:${{ github.sha }}
-          #        format: 'table'
-          #        exit-code: '1'
-          #        ignore-unfixed: true
-          #        vuln-type: 'os,library'
-          #        severity: 'CRITICAL,HIGH'
+    - name: "Scan image"
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: evelonche/mlflow:${{ github.sha }}
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
     - name: "Push image"
       uses: docker/build-push-action@v3
       with:
@@ -82,34 +81,43 @@ jobs:
         push: true
         tags: evelonche/mlflow:${{ github.sha }}
 
-          #    training-build-push:
-          #    name: "Build Docker image, check for vulneratibilities and push"
-          #    runs-on: ubuntu-latest
-          #    needs: vulnerability
-          #    steps:
-          #    - name: "Checkout"
-          #      uses: actions/checkout@v4
-          #    - name: "Set up QEMU"
-          #      uses: docker/setup-qemu-action@v3
-          #    - name: "Set up BuildX"
-          #      uses: docker/setup-buildx-action@v3
-          #    - name: "Login to Docker Hub"
-          #      uses: docker/login-action@v3
-          #      with:
-          #        username: ${{ secrets.DOCKERHUB_USERNAME }}
-          #        password: ${{ secrets.DOCKERHUB_TOKEN}}
-          #    - name: "Build and export to Docker (without push)"
-          #      uses: docker/build-push-action@v3
-          #      with:
-          #        context: .
-          #        load: true
-          #        tags: evelonche/app:${{ github.sha }}
-          #    - name: "Scan image"
-          #      uses: aquasecurity/trivy-action@master
-          #      with:
-          #        image-ref:
-          #        format: 'table'
-          #        exit-code: '1'
-          #        ignore-unfixed: true
-          #        vuln-type: 'os,library'
-          #        severity: 'CRITICAL,HIGH'
+  training-build-push:
+    name: "Build Docker image, check for vulneratibilities and push"
+    runs-on: ubuntu-latest
+    needs: sonar_cloud
+    steps:
+    - name: "Checkout"
+      uses: actions/checkout@v4
+    - name: "Set up QEMU"
+      uses: docker/setup-qemu-action@v3
+    - name: "Set up BuildX"
+      uses: docker/setup-buildx-action@v3
+    - name: "Login to Docker Hub"
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN}}
+    - name: "Build and export to Docker (without push)"
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        file: ./Dockerfile
+        push: false
+        tags: evelonche/elasticnet:${{ github.sha }}
+    - name: "Scan image"
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: evelonche/elasticnet:${{ github.sha }}
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+    - name: "Push image"
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: evelonche/elasticnet:${{ github.sha }}
+
