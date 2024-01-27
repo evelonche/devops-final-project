@@ -1,6 +1,17 @@
+resource "kubernetes_namespace" "mlflow" {
+  metadata {
+    labels = {
+      app = "mlflow"
+    }
+    name = "mlflow"
+  }
+}
+
+
 resource "kubernetes_deployment" "mlflow_server" {
   metadata {
     name = "mlflow-server"
+    namespace = kubernetes_namespace.mlflow.metadata[0].name
     labels = {
       app = "mlflow"
     }
@@ -19,11 +30,12 @@ resource "kubernetes_deployment" "mlflow_server" {
         labels = {
           app = "mlflow"
         }
+        name = "mlflow-server-pod"
       }
 
       spec {
         container {
-          image = "ghcr.io/mlflow/mlflow:v2.9.2"
+          image = "evelonche/mlflow:f744124c7589678dcd5f9af0a3ac4de50978f916"
           name  = "mlflow"
 
           port {
@@ -37,11 +49,11 @@ resource "kubernetes_deployment" "mlflow_server" {
 
           env {
             name  = "ARTIFACT_ROOT"
-            value = "/mlflow"
+            value = var.mlflow_artifact_path
           }
 
           volume_mount {
-            mount_path = "/mlflow"
+            mount_path = var.mlflow_artifact_path
             name       = "mlflow-volume"
           }
         }
@@ -61,6 +73,7 @@ resource "kubernetes_deployment" "mlflow_server" {
 resource "kubernetes_service" "mlflow_server" {
   metadata {
     name = "mlflow-service"
+    namespace = kubernetes_namespace.mlflow.metadata[0].name
   }
 
   spec {
@@ -80,7 +93,9 @@ resource "kubernetes_service" "mlflow_server" {
 resource "kubernetes_persistent_volume_claim" "mlflow_pvc" {
   metadata {
     name = "mlflow-pvc"
+    namespace = kubernetes_namespace.mlflow.metadata[0].name
   }
+
 
   spec {
     access_modes = ["ReadWriteOnce"]
@@ -92,28 +107,28 @@ resource "kubernetes_persistent_volume_claim" "mlflow_pvc" {
   }
 }
 
-resource "kubernetes_ingress" "mlflow_ingress" {
-  metadata {
-    name = "mlflow-ingress"
-    annotations = {
-      "kubernetes.io/ingress.class" = "nginx"
-      "nginx.ingress.kubernetes.il/add-base-url" = "true"
-  }
-  spec {
-    rule { 
-      host = "mlflow-sever.local"
-      http {
-        path {
-          backend {
-            service_name = "mlflow-service"
-            service_port = 5000
-          }
-          path = "/"
-        }
-      }
-    }
-  }
-}
-    
+#resource "kubernetes_ingress" "mlflow_ingress" {
+#  metadata {
+#    name = "mlflow-ingress"
+#    annotations = {
+#      "kubernetes.io/ingress.class" = "nginx"
+#      "nginx.ingress.kubernetes.il/add-base-url" = "true"
+#    }
+#  }
+#  spec {
+#    rule { 
+#      host = "mlflow-sever.local"
+#      http {
+#        path {
+#          backend {
+#            service_name = "mlflow-service"
+#            service_port = 5000
+#          }
+#          path = "/"
+#        }
+#      }
+#    }
+#  }
+#} 
 
 

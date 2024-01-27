@@ -20,3 +20,9 @@ variable "db_name" {
   type        = string
   default     = "mlflowdb"
 }
+
+variable "mlflow_artifact_path" {
+  description = "Path for MLflow artifacts"
+  type = string
+  default = "/mlflow/artifacts"
+}
