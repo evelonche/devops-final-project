@@ -1,7 +1,7 @@
-FROM python:3.8.2-slim
+FROM python:3.10.13-slim
 
-RUN pip install mlflow[extras]==1.9.1 && \
-    pip install psycopg2-binary==2.8.5
+RUN pip install mlflow[extras]==2.9.2 && \
+    pip install psycopg2-binary==2.9.9
 
 
 EXPOSE 5000

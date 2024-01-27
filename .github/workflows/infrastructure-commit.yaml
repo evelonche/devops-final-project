@@ -15,6 +15,7 @@ jobs:
       - name: Check infrastructure code with Checkov
         uses: bridgecrewio/checkov-action@v12
         with:
+          check: 'HIGH, CRITICAL'
           directory: infrastructure/
           output_format: cli
           output_file_path: console
