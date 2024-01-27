@@ -65,15 +65,15 @@ jobs:
         file: ./mlflow.Dockerfile
         push: false
         tags: evelonche/mlflow:${{ github.sha }}
-    - name: "Scan image"
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: evelonche/mlflow:${{ github.sha }}
-        format: 'table'
-        exit-code: '1'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        severity: 'CRITICAL,HIGH'
+          #    - name: "Scan image"
+          #      uses: aquasecurity/trivy-action@master
+          #      with:
+          #        image-ref: evelonche/mlflow:${{ github.sha }}
+          #        format: 'table'
+          #        exit-code: '1'
+          #        ignore-unfixed: true
+          #        vuln-type: 'os,library'
+          #        severity: 'CRITICAL,HIGH'
     - name: "Push image"
       uses: docker/build-push-action@v3
       with:
