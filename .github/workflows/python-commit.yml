@@ -65,7 +65,9 @@ jobs:
     - name: "Push to Docker Hub"
       run: |
         docker tag mlflow:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/mlflow:${{ github.sha }}
+        docker tag mlflow:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/mlflow:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mlflow:${{ github.sha }}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/mlflow:latest
 
   elasticnet-build-push:
     name: "Build training Docker image, check for vulneratibilities and push"
@@ -91,4 +93,6 @@ jobs:
     - name: "Push to Docker Hub"
       run: |
         docker tag mltraining:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/mltraining:${{ github.sha }}
+        docker tag mltraining:${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/mltraining:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mltraining:${{ github.sha }}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/mltraining:latest
