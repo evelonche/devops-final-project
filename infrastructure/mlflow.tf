@@ -68,6 +68,9 @@ resource "kubernetes_deployment" "mlflow_server" {
       }
     }
   }
+  depends_on = [
+    kubernetes_service.postgres
+  ]
 }
 
 resource "kubernetes_service" "mlflow_server" {
@@ -88,6 +91,9 @@ resource "kubernetes_service" "mlflow_server" {
 
     type = "NodePort"
   }
+  depends_on = [
+    kubernetes_service.postgres
+  ]
 }
 
 resource "kubernetes_persistent_volume_claim" "mlflow_pvc" {
@@ -104,6 +110,14 @@ resource "kubernetes_persistent_volume_claim" "mlflow_pvc" {
         storage = "10Gi"
       }
     }
+  }
+}
+
+resource "null_resource" "waiting" {
+  depends_on = [ kubernetes_service.mlflow_server ]
+  
+  provisioner "local-exec" {
+    command = "sleep 30" 
   }
 }
 
@@ -136,6 +150,9 @@ resource "kubernetes_job" "train_job" {
 
     backoff_limit = 2
   }
+  depends_on = [
+    null_resource.waiting 
+  ]
 }
 
 
