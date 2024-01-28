@@ -3,15 +3,24 @@ run-name: ${{ github.actor }} made a commit to infrastructure
 
 on:
   push:
-    paths: ['infrastructure/**' ]
+    #    paths: ['infrastructure/**' ]
     branches: [ 'ftr/*' ]
 
 jobs:
+  format-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Check Terraform formatting
+        uses: dflook/terraform-fmt-check@v1
+        with:
+          path: "/infrastructure"
   checkov-scan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Check infrastructure code with Checkov
         uses: bridgecrewio/checkov-action@v12
         with:
