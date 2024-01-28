@@ -71,7 +71,7 @@ Topics from the DevOps course which are covered:
    You can now access the MLflow UI at http://localhost:5000/.
 6. Apply the training manifest from `/training` on the mlflow namespace
    ```
-   kubectl apply -f ../training/elasticnet_manifest.yml -n mlflow
+   kubectl apply -f training/elasticnet_manifest.yml -n mlflow
    ```
    The job will be finished in several seconds, and then you can see the results on the MLflow UI
 ![Screenshot from 2024-01-28 14-36-55](https://github.com/evelonche/devops-final-project/assets/14963998/5c4c770b-e28b-461a-89c1-042f9de4d115)
