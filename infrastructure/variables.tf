@@ -12,18 +12,18 @@ variable "db_name" {
 
 variable "mlflow_artifact_path" {
   description = "Path for MLflow artifacts"
-  type = string
-  default = "/mlflow/artifacts"
+  type        = string
+  default     = "/mlflow/artifacts"
 }
 
 variable "mlflow_image_tag" {
-  description = "Tag to use for the MLflow server Docker image" 
-  type = string
-  default = "latest"
+  description = "Tag to use for the MLflow server Docker image"
+  type        = string
+  default     = "latest"
 }
 
 variable "training_job_image_tag" {
   description = "Tag to use for ML training Docker image"
-  type = string
-  default = "latest"
+  type        = string
+  default     = "latest"
 }
