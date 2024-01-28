@@ -20,7 +20,7 @@ import mlflow
 import mlflow.sklearn
 from mlflow.models import infer_signature
 
-logging.basicConfig(level=logging.WARN)
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
