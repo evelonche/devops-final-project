@@ -37,7 +37,10 @@ Topics from the DevOps course which are covered:
   - `infrastructure-commit.yaml` is a pipeline which runs whenever changes are made to the /infrastructure directoty. It checks the terraform formatting, lints the Terraform code, validates it and performs a Checkov check
   - `python-commit.yml` is a pipeline which runs whenever changes are made to the `/training` directory or the main `Dockerfile`. It runs black, pylint, gitleaks, SonarCloud, build the Docker image, checks it for vulnerabilities with Trivy and then pushes it to Dockerhub.
   - `mlflow-commit.yml` is a pipeline which runs whenever changes are made to the `mlflow.Dockerfile` or its `requirements.txt`. It builds the Docker image for the MLflow tracking server, checks it for vulnerabilities with Trivy and pushes it to Dockerhub.
-  - 
+![cluster_diagram drawio](https://github.com/evelonche/devops-final-project/assets/14963998/24365f7e-a54c-4ebf-b2b9-fab30b63bd5a)
+
+
+
 ## Requirements
 - Minikube cluster running on local machine. Ingress addon of Minikube enabled. Kubectl installed.
 - Terraform >= 1.7.0.
