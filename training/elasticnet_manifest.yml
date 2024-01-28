@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: train-job
+  namespace: mlflow
+  labels:
+    app: mlflow
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      containers:
+      - name: mltraining
+        image: evelonche/mltraining:latest
+        env:
+        - name: MLFLOW_TRACKING_URI
+          value: "http://mlflow-service.mlflow.svc.cluster.local:5000"
+      restartPolicy: Never
