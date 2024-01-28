@@ -8,7 +8,7 @@ on:
       - './requiremeents.txt'
       - './mlflow.Dockerfile'   
 
-mlflow-build-push:
+  mlflow-build-push:
     name: "Build MLflow Docker image, check for vulneratibilities and push"
     runs-on: ubuntu-latest
     steps:
