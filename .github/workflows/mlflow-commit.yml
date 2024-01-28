@@ -5,8 +5,8 @@ on:
   push:
     branches: [ ftr/* ]
     paths:
-      - './requiremeents.txt'
-      - './mlflow.Dockerfile'   
+      - 'requirements.txt'
+      - 'mlflow.Dockerfile'   
 jobs:
   mlflow-build-push:
     name: "Build MLflow Docker image, check for vulneratibilities and push"
