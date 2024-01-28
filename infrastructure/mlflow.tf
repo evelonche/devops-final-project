@@ -10,7 +10,7 @@ resource "kubernetes_namespace" "mlflow" {
 
 resource "kubernetes_deployment" "mlflow_server" {
   metadata {
-    name = "mlflow-server"
+    name      = "mlflow-server"
     namespace = kubernetes_namespace.mlflow.metadata[0].name
     labels = {
       app = "mlflow"
@@ -62,7 +62,7 @@ resource "kubernetes_deployment" "mlflow_server" {
           name = "mlflow-volume"
 
           persistent_volume_claim {
-            claim_name = kubernetes_persistent_volume_claim.mlflow_pvc.metadata[0].name 
+            claim_name = kubernetes_persistent_volume_claim.mlflow_pvc.metadata[0].name
           }
         }
       }
@@ -75,7 +75,7 @@ resource "kubernetes_deployment" "mlflow_server" {
 
 resource "kubernetes_service" "mlflow_server" {
   metadata {
-    name = "mlflow-service"
+    name      = "mlflow-service"
     namespace = kubernetes_namespace.mlflow.metadata[0].name
   }
 
@@ -98,7 +98,7 @@ resource "kubernetes_service" "mlflow_server" {
 
 resource "kubernetes_persistent_volume_claim" "mlflow_pvc" {
   metadata {
-    name = "mlflow-pvc"
+    name      = "mlflow-pvc"
     namespace = kubernetes_namespace.mlflow.metadata[0].name
   }
 
