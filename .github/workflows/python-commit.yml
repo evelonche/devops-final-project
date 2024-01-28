@@ -37,7 +37,10 @@ jobs:
   sonar_cloud:
     name: "Run SonarCloud"
     runs-on: ubuntu-latest
-    needs: gitleaks, pylint, black
+    needs: 
+      - gitleaks
+      - pylint
+      - black
     steps:
     - uses: actions/checkout@v4
     - uses: AppThreat/sast-scan-action@master
