@@ -16,6 +16,17 @@ jobs:
         uses: dflook/terraform-fmt-check@v1
         with:
           path: "./infrastructure/"
+  
+  lint-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Check linting of Terraform code
+        uses: devops-infra/action-tflint@v0.3
+        with:
+          dir_filter: infrastructure/
+
   checkov-scan:
     runs-on: ubuntu-latest
     steps:
