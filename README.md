@@ -69,7 +69,7 @@ Topics from the DevOps course which are covered:
    kubectl port-forward <mlflow-server-pod-name> -n mlflow 5000:5000
    ```
    You can now access the MLflow UI at http://localhost:5000/.
-6. Apply the training manifest from `/training` on the mlflow namespace
+6. Apply the demo training manifest from `/training` on the mlflow namespace
    ```
    kubectl apply -f training/elasticnet_manifest.yml -n mlflow
    ```
