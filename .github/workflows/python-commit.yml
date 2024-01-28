@@ -4,7 +4,9 @@ run-name: ${{ github.actor }} made a commit to the Python directory
 on:
   push:
     branches: [ ftr/* ]
-    paths: [ training/**, *Dockerfile ]
+    paths:
+      - 'training/**'
+      - '*Dockerfile' 
 
 jobs:
   pylint:
