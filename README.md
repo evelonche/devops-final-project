@@ -6,6 +6,7 @@ This project tries to solve an issue I encountered during my bachelor thesis. I 
 
 ## Value stream map of BSc. thesis
 ![ValueStreamMap](https://github.com/evelonche/devops-final-project/assets/14963998/c22c1c41-1c99-480b-b04a-a0f8073cb348)
+
 This is an approximation of how working on my thesis went. The goal was to compare several different models performance for a specific task. The total time available for me to develop and write the thesis was 4 months. According to the Value Stream Map above, for 3 models developed (the amount that were developed in the end), it would take 130 days or 4.33 months. The main bottleneck was tracking the performance of the models, collecting the results and comparing them manually.
 
 # Solution
